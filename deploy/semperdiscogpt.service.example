@@ -1,0 +1,20 @@
+# Example systemd unit. Copy to /etc/systemd/system/semperdiscogpt.service, then:
+#   useradd --system --home /var/lib/semperdiscogpt --shell /usr/sbin/nologin semperdiscogpt
+#   mkdir -p /opt/semperdiscogpt /var/lib/semperdiscogpt && chown semperdiscogpt: /var/lib/semperdiscogpt
+#   cp semperdiscogpt.py /opt/semperdiscogpt/
+#   systemctl daemon-reload && systemctl enable --now semperdiscogpt
+#   journalctl -u semperdiscogpt -n 20 --no-pager
+
+[Unit]
+Description=Semper Disco GPT (DiscoGPT)
+After=network.target ollama.service
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/semperdiscogpt/semperdiscogpt.py --host 127.0.0.1 --port 8080 --data /var/lib/semperdiscogpt
+EnvironmentFile=/etc/semperdiscogpt.env
+User=semperdiscogpt
+NoNewPrivileges=true
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
