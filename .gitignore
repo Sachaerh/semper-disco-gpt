@@ -1,0 +1,25 @@
+# Secrets: the real password and addresses live in an environment file
+.env
+*.env
+
+# Your data: chats, notes, uploads, run logs, eval results
+ragui-data/
+data/
+runs/
+
+# Models and training data (large, and not source code)
+*.npz
+*.gguf
+*.pt
+*.bin
+*.safetensors
+*.pkl
+input*.txt
+cvelistV5/
+
+# Python and editors
+__pycache__/
+*.pyc
+.venv/
+.vscode/
+*.swp
